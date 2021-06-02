@@ -1,0 +1,38 @@
+.modalhr {
+    color: rgb(158, 2, 2);
+}
+
+.price {
+    font-size: smaller;
+    color: maroon;
+    display: inline-block;
+}
+
+.info {
+    width: 87%;
+    display: inline-block;
+}
+
+.quatity {
+    border: solid lightgray;
+    border-width: thin;
+    margin-left: 20px;
+    display: inline-block;
+    width: 40px;
+    padding: 0px 6px;
+    border-radius: 5px;
+    font-size: smaller;
+}
+
+.book {
+    display: inline-block;
+}
+
+.butsmall {
+    margin-top: -100px;
+    padding: 0px 0px;
+}
+
+.rightbut {
+    margin-left: 7px;   
+}

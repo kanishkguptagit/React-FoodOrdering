@@ -1,0 +1,19 @@
+.info {
+    display: inline-block;
+    width: 85%;
+}
+
+.price {
+    color: rgb(172, 49, 4);
+}
+
+.book {    
+    display: inline-block;
+    position: relative;
+    top: -10px;
+}
+
+.book input {
+    margin-left: 20px;
+    width: 60px;
+}

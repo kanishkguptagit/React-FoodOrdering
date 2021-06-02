@@ -1,0 +1,37 @@
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.75);
+}
+
+.card {
+  z-index: 100;
+  position: absolute;
+  top: 25%;
+  left: 30%;
+  width: 40%;
+  height: max-content;
+}
+
+.close {
+  border: solid rgb(170, 2, 2);
+  border-width: thin;
+  color: rgb(165, 1, 1);
+  background-color: white;
+  font-weight: lighter;
+}
+
+.h3 {
+  display: inline-block;
+  width: 90%;
+}
+
+.price {
+  font-weight: bolder;
+  font-size: large;
+  display: inline-block;
+}
