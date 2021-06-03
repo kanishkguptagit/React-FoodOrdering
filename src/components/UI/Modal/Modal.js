@@ -6,8 +6,8 @@ import styles from "./Modal.module.css";
 import Button from "../Button/Button";
 import ModalList from "./ModalList";
 
-const Backdrop = () => {
-  return <div className={styles.backdrop} />;
+const Backdrop = (props) => {
+  return <div className={styles.backdrop} onClick={props.onClose} />;
 };
 
 const PortalOverlay = (props) => {
@@ -19,7 +19,7 @@ const PortalOverlay = (props) => {
       <h3 className={styles.h3}>Total Amount</h3>
       <div className={styles.price}>$88.9</div>
       <div>
-      <Button className={styles.close} onClick={props.onClose} >Close</Button>
+      <Button className={styles.closeButton} onClick={props.onClose} >Close</Button>
       <Button>Order</Button>
       </div>
     </Card>
@@ -30,7 +30,7 @@ const Modal = (props) => {
   return (
     <React.Fragment>
       {ReactDom.createPortal(
-        <Backdrop />,
+        <Backdrop onClose={props.onClose} />,
         document.getElementById("backdrop-root")
       )}
       {ReactDom.createPortal(

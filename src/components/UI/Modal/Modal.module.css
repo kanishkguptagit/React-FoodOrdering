@@ -17,12 +17,12 @@
   height: max-content;
 }
 
-.close {
-  border: solid rgb(170, 2, 2);
-  border-width: thin;
-  color: rgb(165, 1, 1);
-  background-color: white;
-  font-weight: lighter;
+.closeButton {
+  border: solid rgb(170, 2, 2) !important;
+  border-width: thin !important;
+  color: rgb(165, 1, 1) !important;
+  background-color: white !important;
+  font-weight: lighter !important;
 }
 
 .h3 {

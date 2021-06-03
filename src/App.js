@@ -2,7 +2,6 @@ import React from "react";
 
 import Navigation from "./components/Navigation/Navigation";
 import Home from "./components/home/Home";
-import Menu from "./components/Item/Menu";
 import CartProvider from "./store/CartProvider";
 
 const DEMO_DATA = [
@@ -30,8 +29,8 @@ function App() {
   return (
     <CartProvider>
       <Navigation items={DEMO_DATA} />
-      <Home />
-      <Menu items={DEMO_DATA} />
+      <Home items={DEMO_DATA} />
+      
     </CartProvider>
   );
 }

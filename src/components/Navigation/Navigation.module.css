@@ -20,6 +20,7 @@ h2 {
     top: 12%;
     right: 10%;
     display: inline-block;
+    cursor: pointer;
 }
 
 .yourcart {

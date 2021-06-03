@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 import styles from "./Navigation.module.css";
 import logo from "../../images/carticon.png";
 import Modal from "../UI/Modal/Modal";
+import CartContext from "../../store/cart-context";
 
 const Navigation = (props) => {
   const [IsModalOpen, setIsModalOpen] = useState(false);
+
+  const cartCtx = useContext(CartContext);
 
   const modalHandler = () => {
     if (IsModalOpen) setIsModalOpen(false);
@@ -20,9 +23,7 @@ const Navigation = (props) => {
         <div className={styles.cartitems} onClick={modalHandler}>
           <img className={styles.img} src={logo} alt="carticon" />
           <div className={styles.yourcart}>Your Cart</div>
-          <div className={styles.quantity}>
-            <div>2</div>
-          </div>
+          <div className={styles.quantity}>{cartCtx.totalItems}</div>
         </div>
       </div>
     </React.Fragment>
