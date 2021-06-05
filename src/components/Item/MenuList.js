@@ -35,7 +35,7 @@ const MenuList = (props) => {
       </div>
       <div className={styles.book}>
           <label>Amount
-          <input type="number" min="1" max="30" value="1" ref={quantityRef} ></input><br/>
+          <input type="number" min="1" max="30" ref={quantityRef} defaultValue="1" ></input><br/>
           </label>
           <Button onClick={onSubmitHandler}>+Add</Button>
       </div>

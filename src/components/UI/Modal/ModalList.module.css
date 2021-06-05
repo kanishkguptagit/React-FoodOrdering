@@ -18,7 +18,7 @@
     border-width: thin;
     margin-left: 20px;
     display: inline-block;
-    width: 40px;
+    width: fit-content;
     padding: 0px 6px;
     border-radius: 5px;
     font-size: smaller;

@@ -12,20 +12,36 @@ const Backdrop = (props) => {
 };
 
 const PortalOverlay = (props) => {
+
   const ctx = useContext(CartContext);
   const hasItems = ctx.totalItems > 0;
   const displayAmount = ctx.totalAmount.toFixed(2);
+
+  const deleteHandler = (id) => {
+    ctx.removeItem(id);
+  }
+
+  const addHandler = (item) => {
+    ctx.addItem({
+      id: item.id,
+      name: item.name,
+      amount: 1,
+      price: item.price,
+    });
+  }
+
 
   return (
     <Card className={styles.card}>
       <div className={styles.listitem}>
         {ctx.items.map((item) => (
           <ModalList
-            key={item.id}
-            id={item.id}
+            key={item.id}            
             name={item.name}
             price={item.price}
             amount={item.amount}
+            onRemove={deleteHandler.bind(null, item.id)}
+            onAdd={addHandler.bind(null, item)}
           />
         ))}
       </div>
