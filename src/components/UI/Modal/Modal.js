@@ -1,26 +1,45 @@
-import React from "react";
+import React, { useContext } from "react";
 import ReactDom from "react-dom";
 
 import Card from "../Card/Card";
 import styles from "./Modal.module.css";
 import Button from "../Button/Button";
 import ModalList from "./ModalList";
+import CartContext from "../../../store/cart-context";
 
 const Backdrop = (props) => {
   return <div className={styles.backdrop} onClick={props.onClose} />;
 };
 
 const PortalOverlay = (props) => {
+  const ctx = useContext(CartContext);
+  const hasItems = ctx.totalItems > 0;
+  const displayAmount = ctx.totalAmount.toFixed(2);
+
   return (
     <Card className={styles.card}>
-      {props.items.map((item) => (
-        <ModalList key={item.id} id={item.id} name={item.name} price={item.price} />
-      ))}
-      <h3 className={styles.h3}>Total Amount</h3>
-      <div className={styles.price}>$88.9</div>
-      <div>
-      <Button className={styles.closeButton} onClick={props.onClose} >Close</Button>
-      <Button>Order</Button>
+      <div className={styles.listitem}>
+        {ctx.items.map((item) => (
+          <ModalList
+            key={item.id}
+            id={item.id}
+            name={item.name}
+            price={item.price}
+            amount={item.amount}
+          />
+        ))}
+      </div>
+      <span>
+        <h3 className={styles.h3}>Total Amount</h3>
+      </span>
+      <span>
+        <div className={styles.price}>${displayAmount}</div>
+      </span>
+      <div className={styles.buttons}>
+        <Button className={styles.closeButton} onClick={props.onClose}>
+          Close
+        </Button>
+        {hasItems && <Button>Order</Button>}
       </div>
     </Card>
   );

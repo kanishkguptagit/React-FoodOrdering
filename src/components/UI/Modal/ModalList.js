@@ -9,7 +9,7 @@ const ModalList = (props) => {
       <div className={styles.info}>
         <h3>{props.name}</h3>
         <div className={styles.price}><b>${props.price}</b></div>
-        <div className={styles.quatity}>x 1</div>
+        <div className={styles.quatity}>x {props.amount}</div>
       </div>
       <div className={styles.book}>
           <ButtonSmall className={`${styles.butsmall}, ${styles.leftbut}`}>-</ButtonSmall>

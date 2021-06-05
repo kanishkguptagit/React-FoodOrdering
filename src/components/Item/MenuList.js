@@ -1,16 +1,28 @@
-import React, {useRef} from "react";
+import React, { useRef, useContext } from "react";
 
 import styles from "./MenuList.module.css";
 import Button from "../UI/Button/Button";
+import CartContext from "../../store/cart-context";
 
 const MenuList = (props) => {
 
   const quantityRef = useRef();
 
+  const ctx = useContext(CartContext)
+
   const onSubmitHandler = (event) => {
     event.preventDefault();
     console.log(`${props.name} = ${quantityRef.current.value}`);
-    quantityRef.current.value='';
+    const amount = quantityRef.current.value;
+    const amountNumber = +amount;
+
+    ctx.addItem({
+      id: props.id,
+      name: props.name,
+      amount: amountNumber,
+      price: props.price,
+    })
+
   }
 
   return (
@@ -23,9 +35,9 @@ const MenuList = (props) => {
       </div>
       <div className={styles.book}>
           <label>Amount
-          <input type="number" ref={quantityRef} ></input><br/>
+          <input type="number" min="1" max="30" value="1" ref={quantityRef} ></input><br/>
           </label>
-          <Button onClick={onSubmitHandler} >+Add</Button>
+          <Button onClick={onSubmitHandler}>+Add</Button>
       </div>
     <hr />
     </React.Fragment>

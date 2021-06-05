@@ -10,8 +10,32 @@ const defaultCartState = {
 
 const cartReducer = (state, action) => {
     if(action.type === 'ADD'){
-        const updatedItems = state.items.concat(action.item);
-        const updatedAmount = state.totalAmount + action.item.price * action.item.totalAmount; //needs checking
+        const updatedAmount = state.totalAmount + action.item.price * action.item.amount;
+        const updatedTotalItems = state.totalItems + action.item.amount;
+
+        const itemPresent = state.items.findIndex(item => item.id === action.item.id);
+        const existingCartItem = state.items[itemPresent];
+
+        let updatedItems;
+
+        if(itemPresent>=0)
+        {            
+            const updatedItem = {
+                ...existingCartItem,
+                amount: existingCartItem.amount + action.item.amount,
+            }
+            updatedItems = [...state.items];
+            updatedItems[itemPresent] = updatedItem;
+        }
+        else{
+            updatedItems = state.items.concat(action.item);
+        }
+        
+        return {
+            items: updatedItems,
+            totalAmount: updatedAmount,
+            totalItems: updatedTotalItems,
+        }
     }
     return defaultCartState;
 }
@@ -29,7 +53,7 @@ const CartProvider = (props) =>{
     };
     
     const cartContext = {
-        items: cartState.item,
+        items: cartState.items,
         totalItems: cartState.totalItems,
         totalAmount: cartState.totalAmount,
         addItem: addItemHandlerCart,

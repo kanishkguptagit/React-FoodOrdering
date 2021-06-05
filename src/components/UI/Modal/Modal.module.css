@@ -10,11 +10,21 @@
 
 .card {
   z-index: 100;
-  position: absolute;
-  top: 25%;
+  position: fixed;
+  top: 15%;
   left: 30%;
   width: 40%;
-  height: max-content;
+  height: fit-content;
+}
+
+.listitem {
+  max-height: 80%;
+  overflow-y: scroll;
+}
+
+.buttons {
+  display: flex;
+  justify-content: flex-end;
 }
 
 .closeButton {
@@ -27,7 +37,7 @@
 
 .h3 {
   display: inline-block;
-  width: 90%;
+  width: 85%;
 }
 
 .price {
