@@ -69,7 +69,7 @@ const Modal = (props) => {
         document.getElementById("backdrop-root")
       )}
       {ReactDom.createPortal(
-        <PortalOverlay items={props.items} onClose={props.onClose} />,
+        <PortalOverlay onClose={props.onClose} />,
         document.getElementById("modal-root")
       )}
     </React.Fragment>

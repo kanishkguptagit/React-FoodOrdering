@@ -34,7 +34,7 @@ const DEMO_DATA = [
 function App() {
   return (
     <CartProvider>
-      <Navigation items={DEMO_DATA} />
+      <Navigation />
       <Home items={DEMO_DATA} />
       
     </CartProvider>
