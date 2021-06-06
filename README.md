@@ -8,6 +8,6 @@ A food ordering portal application made in react
 3) items can be added in the cart
 
 
-### How to use
+## How to use
 1) npm install
 2) npm start
