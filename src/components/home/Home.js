@@ -2,12 +2,16 @@ import React from "react";
 
 import Card from "../UI/Card/Card";
 import Menu from "../Item/Menu";
+import mealsImage from '../../images/meals.jpeg'
 
 import styles from "./Home.module.css";
 
 const Home = (props) => {
   return (
     <React.Fragment>
+      <div className={styles['main-image']}>
+        <img src={mealsImage} alt='A table full of delicious food!' />
+      </div>
       <Card className={styles.card}>
         <h1>Delicious Food, Delivered To You</h1>
         <p>
@@ -20,6 +24,7 @@ const Home = (props) => {
           and of cource by experienced chefs!
         </p>
       </Card>
+      
       <Menu items={props.items} />
     </React.Fragment>
   );

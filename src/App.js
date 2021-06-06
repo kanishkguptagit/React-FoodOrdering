@@ -19,9 +19,15 @@ const DEMO_DATA = [
   },
   {
     id: "f3",
-    name: "Barbecue Berger",
+    name: "Barbecue Burger",
     desc: "KFC Berger",
     price: "20.2"
+  },
+  {
+    id: "f4",
+    name: "Green Bowl",
+    desc: "Healthy... and green...",
+    price: "18.99"
   },
 ]
 

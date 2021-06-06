@@ -23,6 +23,17 @@ h2 {
     cursor: pointer;
 }
 
+.cartitemsAnimation {
+    padding: 0% 3%;
+    border-radius: 45px;
+    background-color: #42020e;
+    position: absolute;
+    top: 12%;
+    right: 12%;
+    display: inline-block;
+    cursor: pointer;
+}
+
 .yourcart {
     display: inline-block;
     font-weight: bold;

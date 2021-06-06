@@ -20,7 +20,7 @@ const Navigation = (props) => {
       {IsModalOpen && <Modal items={props.items} onClose={modalHandler} />}
       <div className={styles.nav}>
         <h2>ReactMeals</h2>
-        <div className={styles.cartitems} onClick={modalHandler}>
+        <div className={styles.cartitemsAnimation} onClick={modalHandler}>
           <img className={styles.img} src={logo} alt="carticon" />
           <div className={styles.yourcart}>Your Cart</div>
           <div className={styles.quantity}>{cartCtx.totalItems}</div>

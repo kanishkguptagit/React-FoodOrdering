@@ -39,7 +39,7 @@ const MenuList = (props) => {
           </label>
           <Button onClick={onSubmitHandler}>+Add</Button>
       </div>
-    <hr />
+    <hr className={styles.hr} />
     </React.Fragment>
   );
 };
