@@ -8,11 +8,19 @@ const Menu = () => {
   
   const [meals, setmeals] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [fetchError, setFetchError] = useState();
 
   useEffect(()=>{
 
     const fetchMeals = async () => {
-      const response = await fetch('https://foodordering-33b2c-default-rtdb.asia-southeast1.firebasedatabase.app/meals.json');  
+      const response = await fetch(
+        'https://foodordering-33b2c-default-rtdb.asia-southeast1.firebasedatabase.app/meals.json'
+      );  
+
+      if(!response.ok){
+        throw new Error('Something went wrong!');
+      }
+
       const data = await response.json();
 
       let loadedData = []
@@ -30,7 +38,10 @@ const Menu = () => {
       setIsLoading(false);
     }
 
-    fetchMeals();
+    fetchMeals().catch((error)=>{
+      setIsLoading(false);
+      setFetchError(error.message);
+    })
 
   },[])
 
@@ -38,6 +49,14 @@ const Menu = () => {
     return(
     <section className={styles.loading}>
       <p>Loading...</p>
+    </section>
+    )
+  }
+
+  if(fetchError){
+    return(
+    <section className={styles.error}>
+      <p>{fetchError}</p>
     </section>
     )
   }
