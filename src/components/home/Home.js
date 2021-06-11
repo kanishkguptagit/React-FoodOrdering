@@ -6,7 +6,7 @@ import mealsImage from '../../images/meals.jpeg'
 
 import styles from "./Home.module.css";
 
-const Home = (props) => {
+const Home = () => {
   return (
     <React.Fragment>
       <div className={styles['main-image']}>
@@ -25,7 +25,7 @@ const Home = (props) => {
         </p>
       </Card>
       
-      <Menu items={props.items} />
+      <Menu />
     </React.Fragment>
   );
 };
