@@ -7,6 +7,7 @@ import Card from "../UI/Card/Card";
 const Menu = () => {
   
   const [meals, setmeals] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(()=>{
 
@@ -26,13 +27,20 @@ const Menu = () => {
       }
 
       setmeals(loadedData);
+      setIsLoading(false);
     }
 
     fetchMeals();
 
   },[])
 
-  console.log(meals);
+  if(isLoading){
+    return(
+    <section className={styles.loading}>
+      <p>Loading...</p>
+    </section>
+    )
+  }
 
   return (
     <Card className={styles.card}>

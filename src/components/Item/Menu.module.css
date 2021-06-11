@@ -5,3 +5,8 @@
     width: 67%;
     padding: 2% 2%;
 }
+
+.loading {
+    text-align: center;
+    color: white;
+}
