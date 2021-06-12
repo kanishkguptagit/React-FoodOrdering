@@ -13,20 +13,21 @@ const Backdrop = (props) => {
 };
 
 const PortalOverlay = (props) => {
-
   const [checkout, setCheckout] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   const ctx = useContext(CartContext);
   const hasItems = ctx.totalItems > 0;
   const displayAmount = ctx.totalAmount.toFixed(2);
 
-  const checkoutHandler = () =>{
+  const checkoutHandler = () => {
     setCheckout(true);
-  }
+  };
 
   const deleteHandler = (id) => {
     ctx.removeItem(id);
-  }
+  };
 
   const addHandler = (item) => {
     ctx.addItem({
@@ -35,31 +36,43 @@ const PortalOverlay = (props) => {
       amount: 1,
       price: item.price,
     });
-  }
+  };
 
-  const submitOrderHandler = (userData) => {
-    fetch('https://foodordering-33b2c-default-rtdb.asia-southeast1.firebasedatabase.app/orders.json',{
-      method:'POST',
-      body: JSON.stringify({
-        user: userData,
-        orderedItems: ctx.items,
-      })
-    });
-  }
+  const submitOrderHandler = async (userData) => {
+    setIsSubmitting(true);
 
-  const modalButtons = (<div className={styles.buttons}>
-    <Button className={styles.closeButton} onClick={props.onClose}>
-      Close
-    </Button>
-    {hasItems && <Button onClick={checkoutHandler}>Order</Button>}
-  </div>);
+    const response = await fetch(
+      "https://foodordering-33b2c-default-rtdb.asia-southeast1.firebasedatabase.app/orders.json",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          user: userData,
+          orderedItems: ctx.items,
+        }),
+      }
+    );
 
-  return (
-    <Card className={styles.card}>
+    console.log(response.ok);
+
+    setIsSubmitting(false);
+    setSubmitted(true);
+  };
+
+  const modalButtons = (
+    <div className={styles.buttons}>
+      <Button className={styles.closeButton} onClick={props.onClose}>
+        Close
+      </Button>
+      {hasItems && <Button onClick={checkoutHandler}>Order</Button>}
+    </div>
+  );
+
+  const cartContents = (
+    <React.Fragment>
       <div className={styles.listitem}>
         {ctx.items.map((item) => (
           <ModalList
-            key={item.id}            
+            key={item.id}
             name={item.name}
             price={item.price}
             amount={item.amount}
@@ -74,10 +87,35 @@ const PortalOverlay = (props) => {
       <span>
         <div className={styles.price}>${displayAmount}</div>
       </span>
-      {checkout && <Checkout onConfirm={submitOrderHandler} onCancel={props.onClose} />}
+      {checkout && (
+        <Checkout onConfirm={submitOrderHandler} onCancel={props.onClose} />
+      )}
       {!checkout && modalButtons}
-    </Card>
+    </React.Fragment>
   );
+
+  const isSubmittingContext = (
+    <React.Fragment>
+      <p>Sending order data...</p>
+    </React.Fragment>
+  );
+
+  const submittedContext = (
+    <React.Fragment>
+      <p>Successfully sent the order!</p>
+      <div className={styles.buttons}>
+      <Button className={styles.button} onClick={props.onClose}>
+        Close
+      </Button>      
+    </div>
+    </React.Fragment>
+  )
+
+  return <Card className={styles.card}>
+    {!isSubmitting && !submitted && cartContents}
+    {isSubmitting && isSubmittingContext}
+    {!isSubmitting && submitted && submittedContext}
+  </Card>;
 };
 
 const Modal = (props) => {
