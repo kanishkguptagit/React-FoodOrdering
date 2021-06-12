@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import ReactDom from "react-dom";
 
 import Card from "../Card/Card";
@@ -6,6 +6,7 @@ import styles from "./Modal.module.css";
 import Button from "../Button/Button";
 import ModalList from "./ModalList";
 import CartContext from "../../../store/cart-context";
+import Checkout from "./Checkout";
 
 const Backdrop = (props) => {
   return <div className={styles.backdrop} onClick={props.onClose} />;
@@ -13,9 +14,15 @@ const Backdrop = (props) => {
 
 const PortalOverlay = (props) => {
 
+  const [checkout, setCheckout] = useState(false);
+
   const ctx = useContext(CartContext);
   const hasItems = ctx.totalItems > 0;
   const displayAmount = ctx.totalAmount.toFixed(2);
+
+  const checkoutHandler = () =>{
+    setCheckout(true);
+  }
 
   const deleteHandler = (id) => {
     ctx.removeItem(id);
@@ -30,6 +37,12 @@ const PortalOverlay = (props) => {
     });
   }
 
+  const modalButtons = (<div className={styles.buttons}>
+    <Button className={styles.closeButton} onClick={props.onClose}>
+      Close
+    </Button>
+    {hasItems && <Button onClick={checkoutHandler}>Order</Button>}
+  </div>);
 
   return (
     <Card className={styles.card}>
@@ -51,12 +64,8 @@ const PortalOverlay = (props) => {
       <span>
         <div className={styles.price}>${displayAmount}</div>
       </span>
-      <div className={styles.buttons}>
-        <Button className={styles.closeButton} onClick={props.onClose}>
-          Close
-        </Button>
-        {hasItems && <Button>Order</Button>}
-      </div>
+      {checkout && <Checkout onCancel={props.onClose} />}
+      {!checkout && modalButtons}
     </Card>
   );
 };
