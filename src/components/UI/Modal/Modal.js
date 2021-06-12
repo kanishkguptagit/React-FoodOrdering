@@ -6,7 +6,7 @@ import styles from "./Modal.module.css";
 import Button from "../Button/Button";
 import ModalList from "./ModalList";
 import CartContext from "../../../store/cart-context";
-import Checkout from "./Checkout";
+import Checkout from "../../checkout/Checkout";
 
 const Backdrop = (props) => {
   return <div className={styles.backdrop} onClick={props.onClose} />;
@@ -37,6 +37,16 @@ const PortalOverlay = (props) => {
     });
   }
 
+  const submitOrderHandler = (userData) => {
+    fetch('https://foodordering-33b2c-default-rtdb.asia-southeast1.firebasedatabase.app/orders.json',{
+      method:'POST',
+      body: JSON.stringify({
+        user: userData,
+        orderedItems: ctx.items,
+      })
+    });
+  }
+
   const modalButtons = (<div className={styles.buttons}>
     <Button className={styles.closeButton} onClick={props.onClose}>
       Close
@@ -64,7 +74,7 @@ const PortalOverlay = (props) => {
       <span>
         <div className={styles.price}>${displayAmount}</div>
       </span>
-      {checkout && <Checkout onCancel={props.onClose} />}
+      {checkout && <Checkout onConfirm={submitOrderHandler} onCancel={props.onClose} />}
       {!checkout && modalButtons}
     </Card>
   );
