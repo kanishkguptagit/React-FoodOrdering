@@ -56,6 +56,8 @@ const PortalOverlay = (props) => {
 
     setIsSubmitting(false);
     setSubmitted(true);
+
+    ctx.clearCart();
   };
 
   const modalButtons = (
